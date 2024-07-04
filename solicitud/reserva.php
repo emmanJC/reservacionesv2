@@ -1,8 +1,9 @@
 <?php
-if(!isset($_GET['id']) or empty($_GET['id'])){
+if(!isset($_GET['id'])){
     exit;
 }
-$solicitud = $S->getSolicitudIdXKey($_GET['id']);
+
+$solicitud = $S->getSolicitudXid($_GET['id']);
 $sala_name = $S->getXsala($solicitud->sala);
 $estatus = $S->getEstatus($solicitud->estatus);
 $notYes = 1;
@@ -10,7 +11,6 @@ $usuario = $U->getUsuarioById($solicitud->id_usuario);
 $servicioXsolicitud = $S->getServiciosXSolicitud($_GET['id']); 
 // var_dump($servicioXsolicitud);
 // var_dump($usuario);
-
 ?>
 <header class="page-header">
     <h2>Solicitud de reservación</h2>
@@ -25,24 +25,24 @@ $servicioXsolicitud = $S->getServiciosXSolicitud($_GET['id']);
 										<h2 class="card-title">Seguimiento de Solicitud: <?php echo $_GET['id'] ?> </h2>
                                         
                                         <div class="btn-group d-flex  pull-right" role="group">
-                                            <a href="./?seccion=reservacion&accion=lista" class="pr-2 btn btn-secondary mr-1 " > 
+                                            <a href="./?seccion=reservacion&accion=listar" class="pr-2 btn btn-secondary mr-1 " > 
                                             <i class="fa-solid fa-arrow-left"></i>
                                             Volver a reservaciones</a>
                                         </div>
 									</div>
                                     <div class="card-header">
                                         <div class="btn-group d-flex  pull-right" role="group">
-                                            <a href="./?seccion=reservacion&accion=confirmarSolicitud&id=<?php echo $solicitud->rva_key ?>" class="pr-2 btn btn-info mr-1 " > 
+                                            <a href="./?seccion=reservacion&accion=confirmarSolicitud&id=<?php echo $solicitud->id ?>" class="pr-2 btn btn-info mr-1 " > 
                                             <i class="fa-solid fas fa-paper-plane"></i>
                                             Recibido</a>
 
                                             <a href="./?seccion=reservacion&accion=altaEvaluacion" class="pr-2 btn btn-warning mr-1 " > 
                                             <i class="fa-solid fa-arrow-left"></i>
-                                            Proovedores</a>
+                                            Elegir Proovedor</a>
 
 											<a href="./?seccion=reservacion&accion=altaEvaluacion" class="pr-2 btn btn-success mr-1 " > 
                                             <i class="fa-solid fa-arrow-left"></i>
-                                            Reservada</a>
+                                            Factura</a>
 
 											<a href="./?seccion=reservacion&accion=altaEvaluacion" class="pr-2 btn btn-danger mr-1 " > 
                                             <i class="fa-solid fa-arrow-left"></i>

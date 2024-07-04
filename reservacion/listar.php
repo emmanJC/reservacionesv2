@@ -1,8 +1,8 @@
 <?php
  
 $getSalas = $S->getSalas();
-$list = $S->listSolicitudes();
-
+$list = $S->listSolicitudes($usuario->id);
+// var_dump( $usuario);
 ?>
  
 
@@ -58,6 +58,7 @@ $list = $S->listSolicitudes();
                             foreach ($list as $solicitud) {
             					$usuario = $U->getUsuarioById($solicitud->id_usuario);
 								// var_dump($usuario);
+                                // var_dump($solicitud);
                                 $i++;
                                 ?>
                         <tr>
@@ -97,13 +98,13 @@ $list = $S->listSolicitudes();
                                 </td>
 
                                 <td class="actions text-center"> 
-                                    <a href="./?seccion=reservacion&accion=reserva&id=<?php echo $solicitud->id ?>"  class="text-3"><i class="far fa-eye"></i></a>
+                                    <a href="./?seccion=reservacion&accion=reserva&id=<?php echo $solicitud->rva_key ?>"  class="text-3"><i class="far fa-eye"></i></a>
                                 </td>
                                 <td>
                                     <a href="./?seccion=reservacion&accion=reserva&id=<?php echo $solicitud->id ?> " class="btn btn-warning btn-sm d-inline-flex align-items-center py-0 px-1"><i class="far fa-eye me-1"></i> Resultados</a>
                                 </td>
 
-								<td><?php if ($solicitud->fecha_actualizacion != 0) {
+								<td><?php if ($solicitud->fecha_actualizacion != '0000-00-00 00:00:00') {
                                         echo $solicitud->fecha_actualizacion;
 									}
 									?>

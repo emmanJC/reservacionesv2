@@ -1,6 +1,6 @@
 <?php
 
-    $tipos = $Rva->getTipoProducto();
+    // $tipos = $I->getTipoProducto();
 ?>
 
 <header class="page-header">
@@ -26,12 +26,25 @@
 									</div>
                                     <div class="card-header">
                                         <div class="btn-group d-flex  pull-right" role="group">
-                                            <a href="./?seccion=reservacion&accion=evaluacion" class="pr-2 btn btn-warning mr-1 " > 
-                                            <i class="fa-solid fa-arrow-left"></i>
-                                            Evaluación</a>
+                                            <a href="./?seccion=reservacion&accion=evaluacion" class="pr-2 btn btn-primary mr-1 " > 
+                                                <i class="fa-solid fa-star"></i>
+                                                Administradores
+                                            </a>
+                                            <a href="./?seccion=salas&accion=listar" class="pr-2 btn btn-info mr-1 " > 
+                                                <i class="fa-solid fa-star"></i>
+                                                Salas
+                                            </a>
+                                            <a href="./?seccion=reservacion&accion=evaluacion" class="pr-2 btn btn-success mr-1 " > 
+                                                <i class="fa-solid fa-clock"></i>
+                                                Horarios
+                                            </a>
+                                            <a href="./?seccion=evaluacion&accion=listar" class="pr-2 btn btn-info mr-1 " > 
+                                                <i class="fa-solid fa-star"></i>
+                                                Evaluación</a>
 
                                             <a href="./?seccion=reservacion&accion=altaEvaluacion" class="pr-2 btn btn-warning mr-1 " > 
-                                            <i class="fa-solid fa-arrow-left"></i>
+                                            <!-- <i class="fa-solid fa-file-circle-question"></i> -->
+                                            <i class="fa-solid fa-list-check"></i>
                                             Encuesta</a>
                                         </div> 
                                     </div>

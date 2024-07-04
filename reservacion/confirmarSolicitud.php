@@ -1,56 +1,31 @@
 <?php
-if(!isset($_GET['id']) or empty($_GET['id'])){
+if(!isset($_GET['id'])){
     exit;
 }
+
 $solicitud = $S->getSolicitudIdXKey($_GET['id']);
 $sala_name = $S->getXsala($solicitud->sala);
 $estatus = $S->getEstatus($solicitud->estatus);
 $notYes = 1;
 $usuario = $U->getUsuarioById($solicitud->id_usuario);
 $servicioXsolicitud = $S->getServiciosXSolicitud($_GET['id']); 
+$admin = $U->getUsuarioById($solicitud->id_admin);
+
 // var_dump($servicioXsolicitud);
 // var_dump($usuario);
-
 ?>
 <header class="page-header">
     <h2>Solicitud de reservación</h2>
 </header>
 
 <!-- start: page -->
-
 <div class="row">
-    <div class="col-lg-12">
-        <div class="card  ">
-									<div class="card-header">
-										<h2 class="card-title">Seguimiento de Solicitud: <?php echo $_GET['id'] ?> </h2>
-                                        
-                                        <div class="btn-group d-flex  pull-right" role="group">
-                                            <a href="./?seccion=reservacion&accion=lista" class="pr-2 btn btn-secondary mr-1 " > 
-                                            <i class="fa-solid fa-arrow-left"></i>
-                                            Volver a reservaciones</a>
-                                        </div>
-									</div>
-                                    <div class="card-header">
-                                        <div class="btn-group d-flex  pull-right" role="group">
-                                            <a href="./?seccion=reservacion&accion=confirmarSolicitud&id=<?php echo $solicitud->rva_key ?>" class="pr-2 btn btn-info mr-1 " > 
-                                            <i class="fa-solid fas fa-paper-plane"></i>
-                                            Recibido</a>
+    <div class="col">
+        <div class="card-header">
 
-                                            <a href="./?seccion=reservacion&accion=altaEvaluacion" class="pr-2 btn btn-warning mr-1 " > 
-                                            <i class="fa-solid fa-arrow-left"></i>
-                                            Proovedores</a>
-
-											<a href="./?seccion=reservacion&accion=altaEvaluacion" class="pr-2 btn btn-success mr-1 " > 
-                                            <i class="fa-solid fa-arrow-left"></i>
-                                            Reservada</a>
-
-											<a href="./?seccion=reservacion&accion=altaEvaluacion" class="pr-2 btn btn-danger mr-1 " > 
-                                            <i class="fa-solid fa-arrow-left"></i>
-                                            Cancelar</a>
-                                        </div> 
-                                    </div>
-		</div>     
+        </div>
     </div>
+    
 </div>
 
 <div class="row">
@@ -83,8 +58,8 @@ $servicioXsolicitud = $S->getServiciosXSolicitud($_GET['id']);
                                     <div class="col-xl-auto me-xl-5 pe-xl-5 mb-4 mb-xl-0">
                                         <h3 class="text-color-dark font-weight-bold text-4 line-height-1 mt-0 mb-3">Administrador asignado</h3>
                                         <ul class="list list-unstyled list-item-bottom-space-0">
-                                                <li class="text-4">Nombre: <strong>Ale Pruebas </strong></li>
-                                                <li class="text-4">Correo: <strong>pruebas@jc-innovation.com </strong></li>
+                                                <li class="text-4">Nombre: <strong><?php echo $admin->nombre ?> </strong></li>
+                                                <li class="text-4">Correo: <strong><?php echo $admin->email?> </strong></li>
                                         </ul>
                                     </div>
                                     <div class="col-xl-auto me-xl-5 pe-xl-5 mb-4 mb-xl-0">
@@ -135,10 +110,6 @@ $servicioXsolicitud = $S->getServiciosXSolicitud($_GET['id']);
 								</div>
 
 							</div>
-
-
-
-
 
 
 </div>
@@ -210,65 +181,19 @@ $servicioXsolicitud = $S->getServiciosXSolicitud($_GET['id']);
 												
 											</div> 
 										</div> 
-                                        
-
-
-
 									</div>
 								</div>
 
 							</div>
 						</div>
-
-
-                        <div class="row">
-
-                            <div class="col">
-                            <div class="card card-modern">
-									<div class="card-header">
-										<h2 class="card-title">Proveedor</h2>
-									</div>
-									<div class="card-body">
-										<div class="table-responsive">
-											<table class="table table-ecommerce-simple table-ecommerce-simple-border-bottom table-borderless table-striped mb-0" style="min-width: 380px;">
-												<thead>
-													<tr>
-														<th width="10%" class="ps-4">#</th>
-														<th width="40%">Nombre</th>
-														<th width="15%" class="text-end">Personas</th>
-														<th width="20%" class="text-end">Costo por persona</th>
-														<th width="15%" class="text-end">Costo Total</th>
-													</tr>
-												</thead>
-												<tbody>
-													<tr>
-														<td class="ps-4"><a href="ecommerce-products-form.html"><strong>1</strong></a></td>
-														<td><a href="ecommerce-products-form.html"><strong>Eventos La Fete</strong></a></td>
-														<td class="text-end"><?php echo $solicitud->asistentes ;?></td>
-														<td class="text-end">$170</td>
-														<td class="text-end">$<?php  echo ( $solicitud->asistentes * 170)?></td>
-													</tr>
-													<tr>
-														<td class="ps-4"><a href="ecommerce-products-form.html"><strong>2</strong></a></td>
-														<td><a href="ecommerce-products-form.html"><strong>Panetela</strong></a></td>
-														<td class="text-end"><?php echo $solicitud->asistentes ;?></td>
-														<td class="text-end">$255</td>
-														<td class="text-end">$<?php echo ($solicitud->asistentes *255) ;?></td>
-													</tr>
-													<!-- <tr>
-														<td class="ps-4"><a href="ecommerce-products-form.html"><strong>3</strong></a></td>
-														<td><a href="ecommerce-products-form.html"><strong>Product Name Example 3</strong></a></td>
-														<td class="text-end">$132</td>
-														<td class="text-end">1</td>
-														<td class="text-end">$132</td>
-													</tr> -->
-												</tbody>
-											</table>
-										</div>
-
-										 
-									</div>
-								</div>      
-                            
-                            </div>
-                        </div>
+<!-- Confirmar -->
+						<div class="row justify-content-end">
+							<div class="col-12 col-md-auto">
+								<form action="./controller/reservacion.php?accion=confirmar_solicitud" method="POST">
+									<input type="hidden" name="solicitud_id" value="<?php echo $_GET['id']; ?>">
+									<button type="submit" class="btn btn-lg submit-button" style="background-color:<?php echo $estatus->color?>" id="admin_confirm">
+										Confirmar
+									</button>
+								</form>
+							</div>
+						</div>
